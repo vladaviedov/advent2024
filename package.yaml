@@ -1,0 +1,25 @@
+name: advent
+version: 0.1.0
+license: GPL-3.0-only
+github: "vladaviedov/advent2024"
+author: "Vladyslav Aviedov <vladaviedov at protonmail dot com>"
+copyright: "2024 Vladyslav Aviedov"
+description: "Advent 2024 Solutions"
+
+dependencies:
+- base >= 4.7 && < 5
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wmissing-export-lists
+- -Wmissing-home-modules
+- -Wpartial-fields
+- -Wredundant-constraints
+
+executables:
+  day1:
+    main: day1/main.hs
