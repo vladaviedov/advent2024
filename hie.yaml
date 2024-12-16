@@ -1,2 +1,6 @@
 cradle:
   stack:
+    - path: "./day1"
+      component: "advent:exe:day1"
+    - path: "./day2"
+      component: "advent:exe:day2"

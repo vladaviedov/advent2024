@@ -24,3 +24,5 @@ ghc-options:
 executables:
   day1:
     main: day1/main.hs
+  day2:
+    main: day2/main.hs
