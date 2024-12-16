@@ -13,6 +13,7 @@ author:         Vladyslav Aviedov <vladaviedov at protonmail dot com>
 maintainer:     Vladyslav Aviedov <vladaviedov at protonmail dot com>
 copyright:      2024 Vladyslav Aviedov
 license:        GPL-3.0-only
+license-file:   LICENSE
 build-type:     Simple
 
 source-repository head
@@ -25,7 +26,7 @@ executable day1
       Paths_advent
   autogen-modules:
       Paths_advent
-  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -fno-warn-tabs
   build-depends:
       base >=4.7 && <5
   default-language: Haskell2010
