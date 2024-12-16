@@ -19,20 +19,39 @@ secondList (_:y:ys) = y:secondList ys
 secondList _ = []
 
 -- | Convert the number list into an a list of pairs
-toLists :: [Integer] -> [(Integer, Integer)]
-toLists list = zip ((sort . firstList) list) ((sort . secondList) list)
+toPairLists :: [Integer] -> [(Integer, Integer)]
+toPairLists list = zip ((sort . firstList) list) ((sort . secondList) list)
 
 -- | Calculate the sum for part 1
 calcSum :: [(Integer, Integer)] -> Integer
 calcSum = foldr ((+) . abs . uncurry (-)) 0
 
--- | Parse the two input lists from raw file data
-parseLists :: String -> Maybe [(Integer, Integer)]
-parseLists = fmap toLists . allOrNothing . fmap readMaybe . words
+-- | Parse the combined input list from raw file data
+parseFullList :: String -> Maybe [Integer]
+parseFullList = allOrNothing . map readMaybe . words
 
 -- | Calculate part 1 result
 part1 :: String -> Maybe Integer
-part1 = fmap calcSum . parseLists
+part1 = fmap (calcSum . toPairLists) . parseFullList
+
+-- | Convert the number list into two lists
+toLists :: [Integer] -> ([Integer], [Integer])
+toLists list = (,) (firstList list) (secondList list)
+
+-- | Count occurances of a single element
+countEl :: Integer -> [Integer] -> Integer
+countEl e = toInteger . length . filter (==e)
+
+-- | Calculate similarity for a single element
+similarityEl :: Integer -> [Integer] -> Integer
+similarityEl e = (*e) . countEl e
+
+-- | Calculate the similarity score
+calcSimilarity :: [Integer] -> [Integer] -> Integer
+calcSimilarity x y = foldr ((+) . (`similarityEl` y)) 0 x
+
+part2 :: String -> Maybe Integer
+part2 = fmap (uncurry calcSimilarity . toLists) . parseFullList
 
 -- | Output result
 output :: Maybe Integer -> IO ()
@@ -40,4 +59,7 @@ output Nothing = print "Invalid input"
 output (Just result) = print result
 
 main :: IO ()
-main = readFile "input/day1.txt" >>= output . part1
+main = do
+	input <- readFile "input/day1.txt"
+	(output . part1) input
+	(output . part2) input
